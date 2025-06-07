@@ -15,7 +15,7 @@ public class DataProcessor
         var groupedPosts = posts.GroupBy(post => post.UserId);
         foreach (var user in users)
         {
-            user.Posts = groupedPosts.Where(post=>post.Key == user.Id).SelectMany(x=>x.ToList());
+            user.Posts = groupedPosts.Where(post => post.Key == user.Id).SelectMany(x => x.ToList());
             foreach (var post in user.Posts)
             {
                 post.User = user;
@@ -32,7 +32,7 @@ public class DataProcessor
 
     public IEnumerable<CountPostsByUser> PostsCountByUser(IEnumerable<User> users)
     {
-        return users.Select(u => new CountPostsByUser{ UserName =  u.Name, City = u.Address?.City, PostsCount = u.Posts.Count() });
+        return users.Select(u => new CountPostsByUser { UserName = u.Name, City = u.Address?.City, PostsCount = u.Posts.Count() });
     }
     /// <summary>
     /// Show posts with body more than 170 letters, if posts count with title that have more than 40 letters more than a half of total posts.
@@ -42,8 +42,8 @@ public class DataProcessor
     /// <returns></returns>
     public IEnumerable<CountPostsByUser> PostsMoreThan170(IEnumerable<User> users)
     {
-        var x = users.Where(u => u.Posts.Count(p => p.Title.Length > 40) > u.Posts.Count() / 2).ToList();
-          return x.Select(s => new CountPostsByUser
+        return users.Where(u => u.Posts.Count(p => p.Title.Length > 40) > u.Posts.Count() / 2).ToList()
+            .Select(s => new CountPostsByUser
             {
                 UserName = s.Name,
                 City = s.Address?.City,
