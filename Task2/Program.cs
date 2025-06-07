@@ -25,3 +25,7 @@ foreach (var result in secondFilterResult)
 {
     Console.WriteLine(result);
 }
+
+Console.WriteLine("Press any key for continue");
+
+Console.ReadLine();
